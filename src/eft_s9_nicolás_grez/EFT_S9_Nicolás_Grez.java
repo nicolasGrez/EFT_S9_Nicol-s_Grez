@@ -45,7 +45,7 @@ public class EFT_S9_Nicolás_Grez {
             switch(opcion){
                 case 1 -> menuZonas();
                 case 2 -> comprarEntrada();
-                case 3 -> eliminarEntrada();
+                case 3 -> buscarCliente();
                 case 4 -> imprimirBoleta();
                 case 5 -> System.out.println("Gracias por su compra!\n Hasta luego!");
                 default -> System.out.println("Opcion no valida, intente nuevamente");
@@ -100,7 +100,7 @@ public class EFT_S9_Nicolás_Grez {
         System.out.println("\n--- TEATRO MORO ---");
                 System.out.println("1. Mostrar Zonas disponibles");
                 System.out.println("2. Comprar entradas");
-                System.out.println("3. Eliminar reserva existentes");
+                System.out.println("3. Buscar cliente existentes");
                 System.out.println("4. Imprimir boleta");
                 System.out.println("5. Salir");
     }
@@ -244,23 +244,16 @@ public class EFT_S9_Nicolás_Grez {
         System.out.println(mensaje);
         return sc.nextLine();
     }
-    
-    static void eliminarEntrada(){
-        String nombre = leerTexto("Ingrese nombre de cliente a eliminar: ");
-        Iterator<String> it = boletas.iterator();
-        while(it.hasNext()){
-            String ficha = it.next();
+static void buscarCliente(){
+        String nombre = leerTexto("Ingrese nombre del cliente: ");
+        for(String ficha: boletas){
             if(ficha.toLowerCase().contains(nombre.toLowerCase())){
-                String[] datos = ficha.split(", "); 
-                total -= Double.parseDouble(datos[5]);
-                it.remove();
-                System.out.println("Entrada eliminada");
+                System.out.println("Cliente encontrado: "+ ficha);
                 return;
             }
         }
-        System.out.println("No se encontró esa entrada");
+        System.out.println("No se encontro este cliente");
     }
-    
     static void mostrarVip(){
         System.out.println("===ZONA VIP===");
         for(int i = 0; i<2; i++){
